@@ -4,7 +4,7 @@
 
 #  Section A: Project Overview
 
-This project performs a comprehensive data analysis and visualization of  sales  that occurred in the Electrosoft Pizzeria. The analysis explores the company across sales, orders  ,sizes amongst other factors in
+This project performs a comprehensive data analysis and visualization of  sales  that occurred in the Electrosoft Pizzeria. The analysis explores the company across sales, orders  ,sizes amongst other factors in the 
 
 # Section B:  Dataset Description
 
