@@ -1,4 +1,4 @@
-# Techno_hacks_Pizza_Sales-_Data_Query_Project
+# Techno_hacks_Pizza_Sales-_Data_Query_Projects
 
 #  PIZZA SALES SQL DATA PROJECT 
 
