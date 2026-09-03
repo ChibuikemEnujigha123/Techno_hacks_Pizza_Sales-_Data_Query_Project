@@ -46,75 +46,113 @@ The data cleaning has basically been done before the project was done so the dat
 # 2. TOTAL REVENUE GENERATED FROM PIZZA SALES 
 
 SELECT   ROUND(SUM(od.quantity * p.price), 2) AS total_revenue
+
 FROM order_details od
+
 JOIN  pizzas p ON od.pizza_id = p.pizza_id;
 
 # 3.IDENTIFY THE HIGHEST PRICED PIZZA
 
  SELECT TOP 1  pt.name, p.price FROM pizza_types pt
+ 
  JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
+ 
 ORDER BY p.price DESC
 
 #4. Identify the most common pizza size ordered
 
 SELECT TOP 1  p.size,   COUNT(od.order_details_id) AS order 
+
 FROM pizzas p
+
  JOIN order_details od ON p.pizza_id = od.pizza_id
+ 
 GROUP BY p.size
+
 ORDER BY orders DESC;
 
 #5 .List the top 5 most ordered pizza types along with their quantities.(multiple joins)
 
 SELECT TOP 5 pt.name, SUM(od.quantity) AS quantity
+
 FROM pizza_types pt
+
  JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
+ 
  JOIN order_details od ON p.pizza_id = od.pizza_id
+ 
 GROUP BY pt. name
+
 ORDER BY quantity DESC;
 
 #6.TOTAL QUANTITY OF EACH CATEGORY EXPLAINED
 
 SELECT   pt.category, SUM(od.quantity) AS total_quantity
+
 FROM order_details od
+
 JOIN pizzas p ON od.pizza_id = p.pizza_id
+
  JOIN pizza_types pt ON p.pizza_type_id = pt.pizza_type_id
+ 
 GROUP BY pt.category
+
 ORDER BY total_quantity DESC;
 
 #7.DETERMINE THE DISTRIBUTION OF ORDERS BY HOUR OF THE DAY
 
 SELECT  DATEPART(hour, order_time) AS Hours, COUNT(order_id) AS order_count
+
 FROM orders
+
 GROUP BY Hours
+
 SELECT   DATEPART(hour, order_time) AS Hours, COUNT(order_id) AS order_count
+
 FROM orders
+
 GROUP BY DATEPART(hour, order_time); 
 
 #8.HOW MUCH PIZZAS ARE THERE FOR EACH CATEGORY?
 
 SELECT category, COUNT(name ) as pizzas
+
 FROM PIZZA_TYPES
+
 Group by category
 
 #9.DETERMINE THE TOP 3 MOST ORDERED PIZZA BASED ON REVENUE
 
 SELECT TOP 3 pt.name, SUM((od.quantity * p.price)) AS total_revenue
+
 FROM  order_details od
+
 JOIN  pizzas p ON od.pizza_id = p.pizza__
+
 JOIN pizza_types pt ON p.pizza_type_id = pt.pizza_type_id
+
 GROUP BY pt.name
+
 ORDER BY total_revenue DESC;
 
 #10.DETERMINE THREE MOST ORDERED TYPE BASED ON REVENUE FOR EACH CATEGORY.
 
 select category, name ,total_revenue from
+
 (select category ,name, total_revenue,
+
 rank() over(partition by category order by total_revenue desc )as ran from 
+
 (SELECT   pt.category, pt.name, SUM((od.quantity * p.price)) AS total_revenue
+
 FROM order_details od
+
         JOIN pizzas p ON od.pizza_id = p.pizza_id
+        
         JOIN  pizza_types pt ON p.pizza_type_id = pt.pizza_type_id
+        
 GROUP BY pt.category, pt.name) as A) as B where ran<=3;
+
 
 
 #SECTION E: PROJECT INSIGHTS
